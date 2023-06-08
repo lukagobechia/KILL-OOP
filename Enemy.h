@@ -1,7 +1,7 @@
 #pragma onnce
 #include <SFML/Graphics.hpp>
 
-class Hero{
+class Enemy{
 
 
     private:
@@ -19,8 +19,8 @@ class Hero{
 
 
     public:
-    Hero();
-    ~Hero();
+    Enemy();
+    ~Enemy();
 
     void init(std::string,sf::Vector2f position,float mass);
     void update(float dt);
