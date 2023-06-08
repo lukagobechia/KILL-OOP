@@ -82,6 +82,7 @@ int main()
 
         //update game
         sf::Time dt = clock.restart();
+        
         update(dt.asSeconds());
 
         window.clear();
