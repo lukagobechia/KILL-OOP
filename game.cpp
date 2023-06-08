@@ -1,10 +1,7 @@
 #include <iostream>
 #include <SFML/Graphics.hpp>
-
-bool playerMovingRight = false;
-bool playerMovingLeft = false;
-
-//Render Window
+#include "Hero.h"
+//Render Windowsrc
 sf::Vector2f viewSize(1000,720);
 sf::VideoMode vm(viewSize.x,viewSize.y);
 sf::RenderWindow window(vm, "SFML works!");
@@ -12,50 +9,50 @@ sf::RenderWindow window(vm, "SFML works!");
 //Background texture
 sf::Texture backgroundTexture;
 sf::Sprite backgroundSprite;
+Hero hero;
 
-//hero texture
-sf::Texture heroTexture;
-sf::Sprite heroSprite;
-
-//update hero moving
-void update(float dt){
-    if(playerMovingRight){
-        heroSprite.move(150.0f*dt,0);
-    }else if(playerMovingLeft){
-        heroSprite.move(-150.0f*dt,0);
-    }
+void init(){
+    backgroundTexture.loadFromFile("bg.jpg");
+    backgroundSprite.setTexture(backgroundTexture);
+    hero.init("c.png",sf::Vector2f(viewSize.x*0.25f,viewSize.y*0.5f),200); 
 }
-
 
 //handle input
 void updateInput(){
     sf::Event event;
 
     while(window.pollEvent(event)){
-         if(event.type == sf::Event::KeyPressed){
+        if(event.type==sf::Event::KeyPressed){
+            if(event.key.code==sf::Keyboard::Up){
+                hero.jump(750.0f);
+            }
+        }
+
+        if(event.type == sf::Event::KeyPressed){
             if(event.key.code == sf::Keyboard::Right){
-                playerMovingRight = true;
+                hero.moveRight();
             }
          }
 
          if(event.type == sf::Event::KeyReleased){
             if(event.key.code == sf::Keyboard::Right){
-                playerMovingRight = false;
+                hero.stopMoving();
 
             }
          }
 
           if(event.type == sf::Event::KeyPressed){
             if(event.key.code == sf::Keyboard::Left){
-                playerMovingLeft = true;
+                hero.moveLeft();
             }
          }
 
          if(event.type == sf::Event::KeyReleased){
             if(event.key.code == sf::Keyboard::Left){
-                playerMovingLeft = false;
+                hero.stopMoving();
             }
          }
+
 
          if(event.key.code == sf::Keyboard::Escape 
             || event.type== sf::Event::Closed)
@@ -63,28 +60,20 @@ void updateInput(){
     }
 }
 
+void update(float dt){
+    hero.update(dt);
+}
+
+void draw(){
+    window.draw(backgroundSprite);
+    window.draw(hero.getSprite());
+}
+
 int main()
 {
-    //handle background error
-    if (!backgroundTexture.loadFromFile("bg.jpg"))
-    {
-        std::cout << "Failed to load Background!" << std::endl;
-    }
-
-    //set background
-    backgroundSprite.setTexture(backgroundTexture);
-
-    //handle hero error I NEED A HERO
-    if(!heroTexture.loadFromFile("c.png")){
-        std::cout << "Failed to load HERO!" << std::endl;
-    }
-
-    //set hero and its position
-    heroSprite.setTexture(heroTexture);
-    heroSprite.setPosition(sf::Vector2f(viewSize.x/2,viewSize.y/2));
-    heroSprite.setOrigin(heroTexture.getSize().x/2,heroTexture.getSize().y/2);
-
     sf::Clock clock;
+    window.setFramerateLimit(60);
+    init();
 
     while (window.isOpen())
     {
@@ -96,8 +85,7 @@ int main()
         update(dt.asSeconds());
 
         window.clear();
-        window.draw(backgroundSprite);
-        window.draw(heroSprite);
+        draw();
         window.display();
     }
 
