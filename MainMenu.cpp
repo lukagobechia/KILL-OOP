@@ -3,7 +3,7 @@ using namespace sf;
 
 MainMenu::MainMenu(float width, float height)
 {
-    if(!font.loadFromFile("Pixel_Art.ttf")){
+    if(!font.loadFromFile("Fonts/Pixel_Art.ttf")){
         std::cout << "No font is here";
     }
 
