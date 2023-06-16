@@ -3,11 +3,12 @@ using namespace sf;
 
 MainMenu::MainMenu(float width, float height)
 {
-    if(!font.loadFromFile("Fonts/Pixel_Art.ttf")){
+    if(!font.loadFromFile("Pixel_Art.ttf")){
         std::cout << "No font is here";
     }
 
     // play
+
     mainMenu[0].setFont(font);
     mainMenu[0].setFillColor(Color::Black);
     mainMenu[0].setString("START");

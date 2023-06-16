@@ -18,11 +18,12 @@ int main(){
 RectangleShape background;
 background.setSize(Vector2f(1000,720));
 Texture Maintexture;
-Maintexture.loadFromFile("Texture/bg.jpg");
+Maintexture.loadFromFile("bg.jpg");
 background.setTexture(&Maintexture);
 
 while(MENU.isOpen())
 {
+
     Event event;
     while(MENU.pollEvent(event)){
         if(event.type == Event::Closed)

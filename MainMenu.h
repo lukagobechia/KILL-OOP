@@ -9,6 +9,7 @@ using namespace std;
 class MainMenu
 {
     public: 
+    
         MainMenu(float width, float height);
         void draw(RenderWindow& window);
         void MoveUp();
