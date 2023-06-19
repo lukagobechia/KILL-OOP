@@ -1,8 +1,7 @@
 all: compile link
 
 compile:
-	g++ -Isrc/include -c game.cpp Hero.cpp Enemy.cpp
+	g++ -Isrc/include -c MainMenu.cpp MENUSFML.cpp 
 
 link: 
-	g++ game.o Hero.o Enemy.o -o game -Lsrc/lib -lsfml-graphics -lsfml-window -lsfml-system 
-	
+	g++ MainMenu.o MENUSFML.o -o level1 -Lsrc/lib -lsfml-graphics -lsfml-window -lsfml-system

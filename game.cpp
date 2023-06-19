@@ -14,11 +14,11 @@ Hero hero;
 Enemy enemy0,enemy1;
 
 void init(){
-    backgroundTexture.loadFromFile("bg.jpg");
+    backgroundTexture.loadFromFile("Texture/bg.jpg");
     backgroundSprite.setTexture(backgroundTexture);
-    hero.init("c.png",sf::Vector2f(viewSize.x*0.5f,viewSize.y*0.5f),200); 
-    enemy0.init("cpp.png",sf::Vector2f(viewSize.x*0.75f,viewSize.y*0.5f),200);
-    enemy1.init("cpp.png",sf::Vector2f(viewSize.x*0.25f,viewSize.y*0.5f),200); 
+    hero.init("Texture/c.png",sf::Vector2f(viewSize.x*0.5f,viewSize.y*0.5f),200); 
+    enemy0.init("Texture/cpp.png",sf::Vector2f(viewSize.x*0.75f,viewSize.y*0.5f),200);
+    enemy1.init("Texture/cpp.png",sf::Vector2f(viewSize.x*0.25f,viewSize.y*0.5f),200); 
 }
 
 //handle input

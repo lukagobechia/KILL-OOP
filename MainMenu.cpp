@@ -7,19 +7,36 @@ MainMenu::MainMenu(float width, float height)
         std::cout << "No font is here";
     }
 
-    // play
+    // Calculate the center position for horizontal and vertical alignment
+    float centerX = width / 2;
+    float centerY = height / 2;
 
+    // play
     mainMenu[0].setFont(font);
     mainMenu[0].setFillColor(Color::Black);
     mainMenu[0].setString("START");
     mainMenu[0].setCharacterSize(50);
-    mainMenu[0].setPosition(395,300);
+
+     // Get the local bounds of the text
+    sf::FloatRect bounds = mainMenu[0].getLocalBounds();
+
+    // Set the origin to the center of the text
+    mainMenu[0].setOrigin(bounds.left + bounds.width / 2, bounds.top + bounds.height / 2);
+
+    // Set the position to the center of the window
+    mainMenu[0].setPosition(centerX, centerY - bounds.height);
+
+
     // exit
     mainMenu[1].setFont(font);
     mainMenu[1].setFillColor(Color::Black);
     mainMenu[1].setString("EXIT");
     mainMenu[1].setCharacterSize(50);
-    mainMenu[1].setPosition(422,350);
+
+     // Set the origin and position for the "EXIT" text in a similar way
+    bounds = mainMenu[1].getLocalBounds();
+    mainMenu[1].setOrigin(bounds.left + bounds.width / 2, bounds.top + bounds.height / 2);
+    mainMenu[1].setPosition(centerX, centerY + bounds.height);
 
     MainMenuSelected = -1;
 }

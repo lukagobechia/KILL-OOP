@@ -1,6 +1,8 @@
 #include <iostream>
+#include <cstdlib> // For system() function
 #include <SFML/Graphics.hpp>
 #include "MainMenu.h"
+
 using namespace sf;
 
 //Render Windowsrc
@@ -9,8 +11,6 @@ VideoMode vm(viewSize.x,viewSize.y);
 RenderWindow MENU(vm, "Main Menu", Style::Default);
 
 MainMenu mainMenu(MENU.getSize().x,MENU.getSize().y);
-
-
 
 int main(){
     
@@ -42,33 +42,13 @@ while(MENU.isOpen())
                 break;
             }
             if(event.key.code == Keyboard::Return){
-                RenderWindow Play(vm,"game_name");
 
                 int x = mainMenu.MainMenuPressed();
 
                 if(x == 0)
-                {
-                    while(Play.isOpen()){
-                        Event playevent;
-                        while (Play.pollEvent(playevent))
-                        {
-                           if(playevent.type == Event::Closed)
-                           {
-                                Play.close();
-                           }
-                           if(playevent.type == Event::KeyPressed)
-                           {
-                            if(playevent.key.code == Keyboard::Escape)
-                            {
-                                Play.close();
-                            }
-                               
-                           }                          
-                        }
-                        Play.clear();
-                        Play.display();
-                    }
-
+                {   
+                    MENU.close();   
+                    system("MainLevels.exe");
                 }
                 if(x == 1){
                     MENU.close();
