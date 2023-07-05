@@ -85,12 +85,10 @@ int main() {
                 }
             }
         }
-
         LEVELS.clear();
         LEVELS.draw(background);
         levels.draw(LEVELS);
         LEVELS.display();
     }
-
     return 0;
 }

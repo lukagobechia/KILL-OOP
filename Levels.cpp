@@ -21,10 +21,10 @@ Levels::Levels(float width, float height)
     FloatRect bounds = levels[0].getLocalBounds();
 
     // Set the origin to the center of the text
-    levels[0].setOrigin(bounds.left + bounds.width / 2, 10+ bounds.top + bounds.height / 2);
+    levels[0].setOrigin(bounds.left + bounds.width / 2, bounds.top + bounds.height / 2);
 
-    // Set the position to the center of the window
-    levels[0].setPosition(centerX, centerY - bounds.height);
+    // Set the position to the left of the center with increased spacing
+    levels[0].setPosition(centerX - bounds.width - 50, centerY);
 
     // level 2
     levels[1].setFont(font);
@@ -32,7 +32,7 @@ Levels::Levels(float width, float height)
     levels[1].setString("2");
     levels[1].setCharacterSize(50);
     
-    // Set the origin and position for the "level 2" text in a similar way
+    // Set the origin and position for the "level 2" text
     bounds = levels[1].getLocalBounds();
     levels[1].setOrigin(bounds.left + bounds.width / 2, bounds.top + bounds.height / 2);
     levels[1].setPosition(centerX, centerY);
@@ -43,10 +43,10 @@ Levels::Levels(float width, float height)
     levels[2].setString("3");
     levels[2].setCharacterSize(50);
 
-    // Set the origin and position for the "level 3" text in a similar way
+    // Set the origin and position for the "level 3" text with increased spacing
     bounds = levels[2].getLocalBounds();
-    levels[2].setOrigin(bounds.left + bounds.width / 2, bounds.top-10 + bounds.height / 2);
-    levels[2].setPosition(centerX, centerY + bounds.height);
+    levels[2].setOrigin(bounds.left + bounds.width / 2, bounds.top + bounds.height / 2);
+    levels[2].setPosition(centerX + bounds.width + 50, centerY);
 
     // exit
     levels[3].setFont(font);
@@ -54,14 +54,15 @@ Levels::Levels(float width, float height)
     levels[3].setString("EXIT");
     levels[3].setCharacterSize(50);
 
-    // Set the origin and position for the "EXIT" text in a similar way
+    // Set the origin and position for the "EXIT" text
     bounds = levels[3].getLocalBounds();
-    levels[3].setOrigin(bounds.left + bounds.width / 2, bounds.top - 20 + bounds.height / 2);
-    levels[3].setPosition(centerX, centerY + 2 * bounds.height);
-
+    levels[3].setOrigin(bounds.left + bounds.width / 2, bounds.top + bounds.height / 2);
+    levels[3].setPosition(centerX, centerY + bounds.height + 50);
 
     LevelsSelected = -1;
 }
+
+// Rest of the code remains the same...
 
 Levels::~Levels()
 {
