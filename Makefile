@@ -1,7 +1,6 @@
-all: compile link
+all:compile link
 
 compile:
-	g++ -Isrc/include -c MainMenu.cpp MENUSFML.cpp 
-
-link: 
-	g++ MainMenu.o MENUSFML.o -o level1 -Lsrc/lib -lsfml-graphics -lsfml-window -lsfml-system
+	g++ -c win.cpp WinMain.cpp -Isrc/include
+link:
+	g++ win.o WinMain.o -o win -Lsrc/lib -lsfml-graphics -lsfml-window -lsfml-system -lsfml-audio

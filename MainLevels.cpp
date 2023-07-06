@@ -40,44 +40,14 @@ int main() {
                         system("game.exe");
                     }
                     else if (x == 1) {
-                        RenderWindow level2(vm, "Level 2");
-                        while (level2.isOpen()) {
-                            Event event2;
-                            while (level2.pollEvent(event2)) {
-                                if (event2.type == Event::Closed) {
-                                    level2.close();
-                                }
-                                else if (event2.type == Event::KeyPressed) {
-                                    if (event2.key.code == Keyboard::Escape) {
-                                        level2.close();
-                                    }
-                                }
-                            }
-
-                            level2.clear();
-                            // Draw level 2 contents
-                            level2.display();
-                        }
+                        LEVELS.close();
+                        system("game1.exe");
+                    
                     }
                     else if (x == 2) {
-                        RenderWindow level3(vm, "Level 3");
-                        while (level3.isOpen()) {
-                            Event event3;
-                            while (level3.pollEvent(event3)) {
-                                if (event3.type == Event::Closed) {
-                                    level3.close();
-                                }
-                                else if (event3.type == Event::KeyPressed) {
-                                    if (event3.key.code == Keyboard::Escape) {
-                                        level3.close();
-                                    }
-                                }
-                            }
-
-                            level3.clear();
-                            // Draw level 3 contents
-                            level3.display();
-                        }
+                        LEVELS.close();
+                        system("game2.exe");
+                        
                     }
                     else if (x == 3) {
                         LEVELS.close();
@@ -85,10 +55,12 @@ int main() {
                 }
             }
         }
+
         LEVELS.clear();
         LEVELS.draw(background);
         levels.draw(LEVELS);
         LEVELS.display();
     }
+
     return 0;
 }

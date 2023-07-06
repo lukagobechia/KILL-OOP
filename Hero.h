@@ -1,5 +1,6 @@
-#pragma onnce
+#pragma once
 #include <SFML/Graphics.hpp>
+#include "Obstacle.h"
 
 class Hero{
 
@@ -17,16 +18,25 @@ class Hero{
     bool isMovingLeft;
     bool isMovingRight;
 
+    int m_frameCount;
+    float m_animDuration;
+    float m_elapsedTime;
+    sf::Vector2i m_spriteSize;
+
+    bool isAlive = true;
 
     public:
     Hero();
     ~Hero();
 
-    void init(std::string,sf::Vector2f position,float mass);
+    void init(std::string,int frameCount,float animDuration,sf::Vector2f position,float mass);
     void update(float dt);
     void jump(float velocity);
     void moveLeft();
     void moveRight();
     void stopMoving();
     sf::Sprite getSprite();
+    bool Collides(Obstacle o);
+    void setAlive(bool flag);
+    bool isALive();
 };

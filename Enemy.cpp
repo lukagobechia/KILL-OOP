@@ -1,24 +1,35 @@
 #include "Enemy.h"
+#include "Obstacle.h"
 
 Enemy::Enemy(){}
 
 Enemy::~Enemy(){}
 
-void Enemy::init(std::string textureName, sf::Vector2f position,float mass){
+void Enemy::init(std::string textureName,int frameCount, float animDuration, sf::Vector2f position,float mass){
     m_position = position;
     m_mass = mass;
     m_grounded = false;
+
+    m_frameCount = frameCount;
+    m_animDuration = animDuration;
+
+    m_spriteSize = sf::Vector2i(100,100);
     // Load a Texture
     m_texture.loadFromFile(textureName.c_str());
     // Create Sprite and Attach a Texture
     
     m_sprite.setTexture(m_texture);
+    m_sprite.setTextureRect(sf::IntRect(0,0,m_spriteSize.x,m_spriteSize.y));
     m_sprite.setPosition(m_position);
-    m_sprite.setOrigin(m_texture.getSize().x / 2,
-    m_texture.getSize().y / 2);
+    m_sprite.setOrigin(m_spriteSize.x / 2,
+    m_spriteSize.y / 2);
 }
 
 void Enemy::update(float dt){
+
+    m_elapsedTime +=dt;
+    int animFrame = static_cast<int> ((m_elapsedTime/m_animDuration)*m_frameCount)%m_frameCount;
+    m_sprite.setTextureRect(sf::IntRect(animFrame*m_spriteSize.x,0,m_spriteSize.x,m_spriteSize.y));
 
     float acceleration = 500.0f;
 
@@ -28,10 +39,10 @@ void Enemy::update(float dt){
         m_position.x += acceleration * dt;
     }
 
-    if(m_position.x>=1000-m_texture.getSize().x / 2){
-        m_position.x=1000-m_texture.getSize().x / 2;
-    }else if(m_position.x<=m_texture.getSize().x / 2){
-        m_position.x=m_texture.getSize().x / 2;
+    if(m_position.x>=1000-m_spriteSize.x / 2){
+        m_position.x=1000-m_spriteSize.x / 2;
+    }else if(m_position.x<=m_spriteSize.x / 2){
+        m_position.x=m_spriteSize.x / 2;
     }
 
 
@@ -70,6 +81,23 @@ void Enemy::stopMoving(){
 
 sf::Sprite Enemy::getSprite(){
     return m_sprite;
+}
+
+bool Enemy::Collides(Obstacle o){
+    if(m_sprite.getGlobalBounds().intersects(o.getSprite().getGlobalBounds())){
+        
+        return true;
+    }
+
+    return false;
+}
+
+void Enemy::setAlive(bool flag){
+    isAlive = flag;
+}
+
+bool Enemy::isALive(){
+    return isAlive;
 }
 
 

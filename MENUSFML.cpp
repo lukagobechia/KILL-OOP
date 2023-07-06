@@ -1,6 +1,7 @@
 #include <iostream>
 #include <cstdlib> // For system() function
 #include <SFML/Graphics.hpp>
+#include <SFML/Audio.hpp>
 #include "MainMenu.h"
 
 using namespace sf;
@@ -12,6 +13,8 @@ RenderWindow MENU(vm, "Main Menu", Style::Default);
 
 MainMenu mainMenu(MENU.getSize().x,MENU.getSize().y);
 
+sf::Music bgMusic;
+
 int main(){
     
 //set background
@@ -20,6 +23,11 @@ background.setSize(Vector2f(1000,720));
 Texture Maintexture;
 Maintexture.loadFromFile("Texture/bg.jpg");
 background.setTexture(&Maintexture);
+
+    bgMusic.openFromFile("src/include/SFML/Audio/bgAudio.ogg");
+    bgMusic.setLoop(true);
+    bgMusic.play();
+    bgMusic.setVolume(20);
 
 while(MENU.isOpen())
 {
@@ -48,7 +56,7 @@ while(MENU.isOpen())
                 if(x == 0)
                 {   
                     MENU.close();   
-                    system("MainLevels.exe");
+                    system("mainlevels.exe");
                 }
                 if(x == 1){
                     MENU.close();
